@@ -1,6 +1,463 @@
-<p>孙子曰：兵者，国之大事，死生之地，存亡之道，不可不察也。</p>
-<p>故经之以五事，校之以计，而索其情：一曰道，二曰天，三曰地，四曰将、五曰法。</p>
-<p>道者，令民与上同意也，故可以与之死，可以与之生，而不畏危。天者，阴阳，寒暑、时制也。地者，远近、险易、广狭、死生也。</p>
-<p>将者，智、信、仁、勇、严也。法者，曲制、官道、主用也。</p>
-<p>凡此五者，将莫不闻，知之者胜，不知者不胜。</p>
-<p>故校之以计，而索其情，曰：主孰有道？将孰有能？天地孰得？法令孰行？兵众孰强？士卒孰练？赏罚孰明？吾以此知胜负矣。</p>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科幻银河系行星系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            perspective: 1000px;
+        }
+        
+        .universe {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+        
+        /* 星空背景 */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+        }
+        
+        /* 银河系 */
+        .galaxy {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            margin-top: -300px;
+            margin-left: -300px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, 
+                    rgba(100, 80, 255, 0.8) 0%, 
+                    rgba(70, 40, 200, 0.6) 20%,
+                    rgba(40, 20, 120, 0.4) 40%,
+                    transparent 70%),
+                radial-gradient(circle at 70% 70%, 
+                    rgba(120, 100, 255, 0.7) 0%, 
+                    rgba(80, 50, 180, 0.5) 20%,
+                    rgba(50, 30, 140, 0.3) 40%,
+                    transparent 70%);
+            box-shadow: 
+                0 0 100px rgba(100, 80, 255, 0.5),
+                0 0 200px rgba(80, 60, 220, 0.3),
+                inset 0 0 100px rgba(120, 100, 255, 0.4);
+            transform-style: preserve-3d;
+            animation: galaxy-rotate 120s linear infinite;
+        }
+        
+        /* 星际尘埃 */
+        .nebula {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 800px;
+            height: 800px;
+            margin-top: -400px;
+            margin-left: -400px;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, 
+                    rgba(80, 60, 220, 0.2) 0%, 
+                    transparent 50%),
+                radial-gradient(circle at 70% 70%, 
+                    rgba(120, 100, 255, 0.2) 0%, 
+                    transparent 50%);
+            opacity: 0.5;
+            animation: nebula-pulse 20s ease-in-out infinite alternate;
+        }
+        
+        /* 行星轨道 */
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+        }
+        
+        .orbit::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* 行星 */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform-style: preserve-3d;
+            box-shadow: 0 0 20px currentColor;
+        }
+        
+        /* 行星1 - 蓝色气态巨行星 */
+        .planet-1 {
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle at 30% 30%, 
+                #4a8fe7, #1e5bb8, #0d2b5e);
+            box-shadow: 0 0 30px rgba(74, 143, 231, 0.8);
+            color: rgba(74, 143, 231, 0.5);
+            top: -20px;
+            left: 50%;
+            margin-left: -20px;
+        }
+        
+        .orbit-1 {
+            width: 200px;
+            height: 200px;
+            margin-top: -100px;
+            margin-left: -100px;
+            animation: orbit-rotation-1 15s linear infinite;
+        }
+        
+        /* 行星2 - 红色沙漠行星 */
+        .planet-2 {
+            width: 25px;
+            height: 25px;
+            background: radial-gradient(circle at 30% 30%, 
+                #e74c3c, #c0392b, #7e2418);
+            box-shadow: 0 0 20px rgba(231, 76, 60, 0.8);
+            color: rgba(231, 76, 60, 0.5);
+            top: -12.5px;
+            left: 50%;
+            margin-left: -12.5px;
+        }
+        
+        .orbit-2 {
+            width: 300px;
+            height: 300px;
+            margin-top: -150px;
+            margin-left: -150px;
+            animation: orbit-rotation-2 25s linear infinite;
+        }
+        
+        /* 行星3 - 绿色类地行星 */
+        .planet-3 {
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle at 30% 30%, 
+                #2ecc71, #27ae60, #145b32);
+            box-shadow: 0 0 25px rgba(46, 204, 113, 0.8);
+            color: rgba(46, 204, 113, 0.5);
+            top: -17.5px;
+            left: 50%;
+            margin-left: -17.5px;
+        }
+        
+        .orbit-3 {
+            width: 400px;
+            height: 400px;
+            margin-top: -200px;
+            margin-left: -200px;
+            animation: orbit-rotation-3 35s linear infinite;
+        }
+        
+        /* 行星4 - 紫色冰巨星 */
+        .planet-4 {
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle at 30% 30%, 
+                #9b59b6, #8e44ad, #5e3370);
+            box-shadow: 0 0 35px rgba(155, 89, 182, 0.8);
+            color: rgba(155, 89, 182, 0.5);
+            top: -25px;
+            left: 50%;
+            margin-left: -25px;
+        }
+        
+        .orbit-4 {
+            width: 500px;
+            height: 500px;
+            margin-top: -250px;
+            margin-left: -250px;
+            animation: orbit-rotation-4 45s linear infinite;
+        }
+        
+        /* 中心恒星 */
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            margin-top: -40px;
+            margin-left: -40px;
+            background: radial-gradient(circle, 
+                #ffd700, #ff9500, #ff5500);
+            border-radius: 50%;
+            box-shadow: 
+                0 0 50px #ff9500,
+                0 0 100px rgba(255, 149, 0, 0.7),
+                0 0 150px rgba(255, 149, 0, 0.5);
+            animation: sun-pulse 5s ease-in-out infinite alternate;
+        }
+        
+        /* 科幻UI元素 */
+        .ui-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+        
+        .title {
+            position: absolute;
+            top: 10%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 36px;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(100, 100, 255, 0.8);
+        }
+        
+        .data-panel {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(100, 100, 255, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .data-panel h2 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #4a8fe7;
+            border-bottom: 1px solid rgba(100, 100, 255, 0.3);
+            padding-bottom: 5px;
+        }
+        
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .data-label {
+            color: #aaa;
+        }
+        
+        .data-value {
+            color: #4a8fe7;
+        }
+        
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, 
+                transparent, rgba(100, 100, 255, 0.8), transparent);
+            animation: scan 4s linear infinite;
+        }
+        
+        /* 动画定义 */
+        @keyframes galaxy-rotate {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        
+        @keyframes nebula-pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.1); }
+        }
+        
+        @keyframes orbit-rotation-1 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        
+        @keyframes orbit-rotation-2 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        
+        @keyframes orbit-rotation-3 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        
+        @keyframes orbit-rotation-4 {
+            0% { transform: rotateZ(0deg); }
+            100% { transform: rotateZ(360deg); }
+        }
+        
+        @keyframes sun-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 50px #ff9500, 0 0 100px rgba(255, 149, 0, 0.7), 0 0 150px rgba(255, 149, 0, 0.5); }
+            100% { transform: scale(1.1); box-shadow: 0 0 70px #ff9500, 0 0 130px rgba(255, 149, 0, 0.8), 0 0 180px rgba(255, 149, 0, 0.6); }
+        }
+        
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="universe">
+        <div class="stars" id="stars"></div>
+        <div class="nebula"></div>
+        <div class="galaxy"></div>
+        
+        <div class="sun"></div>
+        
+        <div class="orbit orbit-1">
+            <div class="planet planet-1"></div>
+        </div>
+        
+        <div class="orbit orbit-2">
+            <div class="planet planet-2"></div>
+        </div>
+        
+        <div class="orbit orbit-3">
+            <div class="planet planet-3"></div>
+        </div>
+        
+        <div class="orbit orbit-4">
+            <div class="planet planet-4"></div>
+        </div>
+        
+        <div class="ui-overlay">
+            <h1 class="title">银河系行星系统</h1>
+            
+            <div class="data-panel">
+                <h2>行星状态监控</h2>
+                <div class="data-row">
+                    <span class="data-label">系统状态:</span>
+                    <span class="data-value">正常运行</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">轨道稳定性:</span>
+                    <span class="data-value">98.7%</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">检测到行星:</span>
+                    <span class="data-value">4</span>
+                </div>
+                <div class="data-row">
+                    <span class="data-label">时间同步:</span>
+                    <span class="data-value" id="time">--:--:--</span>
+                </div>
+            </div>
+            
+            <div class="scan-line"></div>
+        </div>
+    </div>
+
+    <script>
+        // 创建随机星星
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 500;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // 随机位置
+                const left = Math.random() * 100;
+                const top = Math.random() * 100;
+                
+                // 随机大小
+                const size = Math.random() * 3;
+                
+                // 随机亮度
+                const brightness = Math.random() * 0.8 + 0.2;
+                
+                star.style.left = `${left}%`;
+                star.style.top = `${top}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.opacity = brightness;
+                
+                // 添加闪烁动画
+                if (Math.random() > 0.7) {
+                    star.style.animation = `twinkle ${Math.random() * 3 + 2}s infinite alternate`;
+                }
+                
+                starsContainer.appendChild(star);
+            }
+        }
+        
+        // 更新系统时间
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toTimeString().split(' ')[0];
+            document.getElementById('time').textContent = timeString;
+        }
+        
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            createStars();
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // 添加鼠标移动效果
+            document.body.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth) * 2 - 1;
+                const y = (e.clientY / window.innerHeight) * 2 - 1;
+                
+                const galaxy = document.querySelector('.galaxy');
+                galaxy.style.transform = `rotateZ(${x * 5}deg) rotateX(${y * 5}deg)`;
+            });
+        });
+        
+        // 添加闪烁动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes twinkle {
+                0% { opacity: 0.2; }
+                100% { opacity: 1; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
