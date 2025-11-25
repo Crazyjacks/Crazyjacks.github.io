@@ -1,0 +1,12 @@
+<!-- iPad 简化示意图（矢量） -->
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" role="img" aria-label="iPad 示意图">
+  <rect x="0" y="0" width="480" height="320" fill="#f5f5f7"/>
+  <!-- 机身 -->
+  <rect x="120" y="32" width="240" height="256" rx="26" ry="26" fill="#1d1d1f"/>
+  <!-- 屏幕 -->
+  <rect x="132" y="44" width="216" height="232" rx="18" ry="18" fill="#ffffff"/>
+  <!-- 前置摄像头 -->
+  <circle cx="240" cy="48" r="3" fill="#3a3a3c"/>
+  <ellipse cx="240" cy="294" rx="100" ry="8" fill="rgba(0,0,0,0.08)"/>
+</svg>
+

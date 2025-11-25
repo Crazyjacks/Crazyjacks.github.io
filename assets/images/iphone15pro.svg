@@ -1,0 +1,16 @@
+<!-- iPhone 15 Pro 简化示意图（矢量） -->
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320" role="img" aria-label="iPhone 15 Pro 示意图">
+  <!-- 背景留白区域 -->
+  <rect x="0" y="0" width="480" height="320" fill="#f5f5f7"/>
+  <!-- 手机主体：钛金属暗色边框 -->
+  <rect x="150" y="30" width="180" height="260" rx="28" ry="28" fill="#1d1d1f"/>
+  <!-- 屏幕内衬 -->
+  <rect x="160" y="40" width="160" height="240" rx="20" ry="20" fill="#ffffff"/>
+  <!-- 动态岛摄像头区域 -->
+  <rect x="220" y="44" width="40" height="10" rx="5" ry="5" fill="#1d1d1f"/>
+  <!-- 侧键 -->
+  <rect x="332" y="120" width="6" height="50" rx="3" ry="3" fill="#3a3a3c"/>
+  <!-- 机身倒影 -->
+  <ellipse cx="240" cy="300" rx="90" ry="8" fill="rgba(0,0,0,0.08)"/>
+</svg>
+
